@@ -1,8 +1,9 @@
-# Single-service Calculator (Next.js on Railway)
+# Single-service Calculator (Next.js on Railway) — with sqrt + square
 
-This is a **single Next.js app** that includes:
+One Next.js app that includes:
 - Frontend UI
-- Backend API via Next.js Route Handler: `POST /api/calc`
+- Backend API Route: `POST /api/calc`
+- Operations: +, -, *, /, sqrt, x²
 
 ## Local
 ```bash

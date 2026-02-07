@@ -10,6 +10,8 @@ export default function Home() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const isUnary = op === "sqrt" || op === "pow2";
+
   async function onCalculate(e) {
     e.preventDefault();
     setError("");
@@ -39,7 +41,7 @@ export default function Home() {
           Single app: Next.js UI + API route (<code>/api/calc</code>)
         </p>
 
-        <form onSubmit={onCalculate} style={{ display: "grid", gridTemplateColumns: "1fr 120px 1fr", gap: 10, alignItems: "end" }}>
+        <form onSubmit={onCalculate} style={{ display: "grid", gridTemplateColumns: "1fr 160px 1fr", gap: 10, alignItems: "end" }}>
           <label style={{ display: "grid", gap: 6 }}>
             <span style={{ fontSize: 12, color: "#444" }}>A</span>
             <input value={a} onChange={(e) => setA(e.target.value)} inputMode="decimal"
@@ -54,13 +56,21 @@ export default function Home() {
               <option value="-">-</option>
               <option value="*">*</option>
               <option value="/">/</option>
+              <option value="sqrt">√ (square root)</option>
+              <option value="pow2">x² (square)</option>
             </select>
           </label>
 
-          <label style={{ display: "grid", gap: 6 }}>
+          <label style={{ display: "grid", gap: 6, opacity: isUnary ? 0.5 : 1 }}>
             <span style={{ fontSize: 12, color: "#444" }}>B</span>
-            <input value={b} onChange={(e) => setB(e.target.value)} inputMode="decimal"
-              style={{ padding: 10, borderRadius: 10, border: "1px solid #ddd" }} />
+            <input
+              value={b}
+              onChange={(e) => setB(e.target.value)}
+              inputMode="decimal"
+              disabled={isUnary}
+              placeholder={isUnary ? "Not used" : ""}
+              style={{ padding: 10, borderRadius: 10, border: "1px solid #ddd" }}
+            />
           </label>
 
           <button type="submit" disabled={loading}
@@ -74,6 +84,10 @@ export default function Home() {
           {result !== null && <div style={{ padding: 12, borderRadius: 12, background: "#dcfce7", color: "#166534" }}>
             Result: <strong>{String(result)}</strong>
           </div>}
+        </div>
+
+        <div style={{ marginTop: 12, fontSize: 12, color: "#666" }}>
+          Tip: For √ and x², only <strong>A</strong> is used.
         </div>
       </div>
     </main>
